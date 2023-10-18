@@ -110,5 +110,48 @@ class AdminController extends Controller
     return redirect('/admin')->with('success', 'Товар успешно добавлен');
 }
 
+    public function Delete($id){
+
+        $product = Product::find($id);
+
+        // Проверяем, найден ли товар
+        if (!$product) {
+            return redirect('/admin')->with('error', 'Товар не найден');
+        }
+
+        // Удаляем товар
+        $product->delete();
+        
+        return redirect('/admin')->with('success', 'Товар успешно удален');
+    }
+    public function confirmDelete($id){
+        // Находим товар
+        $product = Product::find($id);
+    
+        // Проверяем, найден ли товар
+        if (!$product) {
+            return redirect('/admin')->with('error', 'Товар не найден');
+        }
+    
+        return view('confirm-delete', ['product' => $product]);
+    }
+    public function ChangePswd(){
+        return view('ChangePswd');
+    }
+    public function Change(Request $request){
+        // dd($request);
+        $admin = User::find(1)->first();
+        $realPswd = User::find(1)->first()->pswd;
+        if($request->old != $realPswd){
+            return redirect('/admin/changePswd')->with('error', "Неверный старый пароль");
+        }
+        if($request->new != $request->conf){
+            return redirect('/admin/changePswd')->with('error', "Пароли не совпадают");
+        }
+        $admin->pswd = $request->new;
+        $admin->save();
+
+        return redirect('/admin')->with('success', "Пароль успешно изменен");
+    }
 }
 

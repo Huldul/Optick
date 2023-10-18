@@ -16,7 +16,7 @@ return new class extends Migration
         if (!User::where('email', 'admin@example.com')->exists()) {
             User::create([
                 'name' => 'Администратор',
-                'email' => 'admin@example.com',
+                'email' => 'admin@mail.com',
                 'pswd' => 'admin', // Замените на свой пароль
                 'isadmin' => 1, // Добавляем метку администратора
             ]);

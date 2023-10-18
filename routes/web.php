@@ -25,6 +25,10 @@ Route::middleware('admin')->group(function () {
     Route::get('admin/add', [AdminController::class, "AddPage"]);
     Route::post('admin/edit/{id}', [AdminController::class, "EditProduct"]);
     Route::post('admin/add', [AdminController::class, "AddProduct"]);
+    Route::get('admin/delete/{id}', [AdminController::class, "Delete"]);
+    Route::get('admin/confirm-delete/{id}', [AdminController::class, "confirmDelete"]);
+    Route::get('admin/changePswd', [AdminController::class, "ChangePswd"]);
+    Route::post('admin/change', [AdminController::class, "Change"]);
 });
 Route::get('/login', [PageController::class, "LoginPage"])->name('login');
 Route::post('login/checkPswd', [PageController::class, "CheckPswd"]);

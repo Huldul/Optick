@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Title</title>
+  <title>Админ панель</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -28,10 +28,20 @@
             <!-- Navbar -->
             <!-- End Navbar -->
             <div class="container-fluid py-4">
+                @if(session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+                @if(session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
                 <div class="row">
                     <div class="col-12">
                         <div class="card my-4">
-                            
+                            <a class="btn btn-warning" style="width: 25%" href="/admin/changePswd">Изменить пароль</a>
                             <div class=" me-3 my-3 text-end">
                                 <a class=" add btn bg-gradient-dark mb-0" href="/admin/add"><i
                                         class=" add material-icons text-sm"></i>&nbsp;&nbsp;Add New
@@ -108,11 +118,39 @@
                                                         <div class="ripple-container"></div>
                                                     </a>
                                                     
-                                                    <button type="button" class="btn close btn-danger btn-link"
-                                                    data-original-title="" title="">
-                                                    <i class="material-icons">close</i>
-                                                    <div class="ripple-container"></div>
+                                                    <a rel="tooltip" class="btn close btn-danger btn-link"
+                                                        href="/admin/delete/{{$product->id}}" data-original-title=""
+                                                        title="">
+                                                        <i class="material-icons">edit</i>
+                                                        <div class="ripple-container"></div>
+                                                    </a>
                                                 </button>
+                                                <!-- Кнопка для открытия модального окна -->
+                                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDeleteModal">
+                                                        Удалить товар
+                                                    </button>
+
+                                                    <!-- Модальное окно подтверждения удаления -->
+                                                    <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Подтвердите удаление</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    Вы уверены, что хотите удалить этот товар?
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                                                                    <!-- Кнопка для подтверждения удаления -->
+                                                                    <a href="{{ url('/admin/delete/' . $product->id) }}" class="btn btn-danger">Удалить</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -135,7 +173,6 @@
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
     integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
   </script>
-
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
     integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
   </script>

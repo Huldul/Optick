@@ -31,7 +31,6 @@
                     </ul>
                 </div>
             @endif
-
             <div class="panel-body">
                 <form action="/admin/edit/{{$product->id}}" method="POST" class="form-horizontal " style="display: flex;
                 flex-direction: column;" enctype="multipart/form-data">
