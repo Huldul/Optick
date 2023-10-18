@@ -1,0 +1,15 @@
+.add{
+    background: gray;
+}
+.edit{
+    background: green;
+    text-decoration: none;
+}
+.close{
+    background: red;
+    text-decoration: none;
+}
+i{
+    text-decoration: none; /* Убираем подчеркивание */
+    color: #000; /* Задаем цвет текста */
+}
